@@ -2,6 +2,11 @@
 
 Install and configure a Secure Web Application Gateway (SWAG) docker container with ansible
 
+## Installation
+[Ansible Galaxy](https://galaxy.ansible.com/docs/using/installing.html) can be used to install the role:
+
+`ansible-galaxy install git+https://github.com/hobointhecorner/hobo.ansible.nginx.git[,<branch or commit hash>]`
+
 ## Parameters
 |            Name            | Required | Type | Default | Description |
 |----------------------------|----------|------|----------|------------|
