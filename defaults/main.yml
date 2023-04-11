@@ -1,0 +1,26 @@
+---
+swag_root_config_dir: /srv/swag
+swag_container_image: lscr.io/linuxserver/swag:latest
+swag_container_ports:
+  - 80:80
+  - 443:443
+swag_container_volumes:
+  - "{{ swag_root_config_dir }}/{{ swag_server_domain }}/config:/config"
+
+swag_user: swag
+swag_user_id: 1001
+swag_group: swag
+swag_group_id: 1001
+swag_owner: swag
+swag_dir_mode: "2755"
+swag_file_mode: "640"
+swag_group_members: []
+
+swag_cert_domain: "{{ swag_server_domain }}"
+swag_cert_subdomains: [] # use `wildcard` for a wildcard cert
+swag_cert_extra_domains: []
+swag_cert_config_extension: ini
+swag_cert_staging: false
+
+swag_timezone: Etc/UTC
+swag_disable_default_page: no

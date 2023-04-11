@@ -1,0 +1,106 @@
+---
+- name: Set configuration values
+  tags:
+    - always
+  set_fact:
+    swag_config_dir: "{{ swag_root_config_dir }}/{{ swag_server_domain|mandatory }}"
+
+- name: Ensure service group
+  become: yes
+  tags:
+    - swag
+  group:
+    name: "{{ swag_group }}"
+    gid: "{{ swag_group_id }}"
+
+- name: Ensure service user
+  become: yes
+  tags:
+    - swag
+  user:
+    name: "{{ swag_user }}"
+    group: "{{ swag_group }}"
+
+- name: Ensure service group membership
+  become: yes
+  loop: "{{ swag_group_members }}"
+  tags:
+    - swag
+  user:
+    name: "{{ item }}"
+    append: yes
+    groups:
+      - "{{ swag_group }}"
+
+- name: Ensure configuration directories
+  become: yes
+  loop:
+    - "{{ swag_config_dir }}"
+    - "{{ swag_config_dir }}/config"
+    - "{{ swag_config_dir }}/config/dns-conf"
+  tags:
+    - swag
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ swag_owner }}"
+    group: "{{ swag_group }}"
+    mode: "{{ swag_dir_mode }}"
+
+- name: Template docker compose file
+  become: yes
+  notify: Reload swag service
+  tags:
+    - swag
+  template:
+    src: docker-compose.yml.j2
+    dest: "{{ swag_config_dir }}/docker-compose.yml"
+    owner: "{{ swag_owner }}"
+    group: "{{ swag_group }}"
+    mode: "{{ swag_dir_mode }}"
+
+- name: Template .env file
+  become: yes
+  notify: Reload swag service
+  tags:
+    - swag
+  template:
+    src: .env.j2
+    dest: "{{ swag_config_dir }}/.env"
+    owner: "{{ swag_owner }}"
+    group: "{{ swag_group }}"
+    mode: "{{ swag_file_mode }}"
+
+- name: Ensure swag cert config file
+  become: yes
+  notify: Reload swag service
+  when: swag_cert_dns_config is defined
+  tags:
+    - swag
+  copy:
+    dest: "{{ swag_config_dir }}/config/dns-conf/{{ swag_cert_dnsplugin }}.{{ swag_cert_config_extension }}"
+    content: "{{ swag_cert_dns_config }}"
+    owner: "{{ swag_owner }}"
+    group: "{{ swag_group }}"
+    mode: "{{ swag_file_mode }}"
+
+- name: Template swag service file
+  become: yes
+  notify: Reload swag service
+  tags:
+    - swag
+  template:
+    src: swag.service.j2
+    dest: /etc/systemd/system/swag.{{ swag_server_domain }}.service
+    owner: root
+    group: root
+    mode: "755"
+
+- name: Ensure swag default page file absent
+  when: swag_disable_default_page|bool
+  become: yes
+  tags:
+    - swag
+  file:
+    path: "{{ swag_config_dir }}/config/www/index.html"
+    state: absent

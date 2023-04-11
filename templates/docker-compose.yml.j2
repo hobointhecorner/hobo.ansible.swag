@@ -1,0 +1,12 @@
+version: "3.2"
+
+services:
+  swag:
+    container_name: swag.{{ swag_server_domain|mandatory }}
+    image: {{ swag_container_image }}
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+    ports: {{ swag_container_ports | to_json }}
+    volumes: {{ swag_container_volumes | to_json }}
+    env_file: {{ swag_config_dir }}/.env

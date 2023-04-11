@@ -1,0 +1,16 @@
+---
+#
+# MANDATORY
+#
+
+swag_server_domain:
+
+#
+# OPTIONAL
+#
+
+swag_cert_email:
+swag_cert_validation:
+swag_cert_provider:
+swag_cert_dnsplugin:
+swag_cert_dns_config:

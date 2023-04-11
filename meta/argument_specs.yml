@@ -1,0 +1,132 @@
+---
+argument_specs:
+  main:
+    options:
+    #
+    # VARIABLES
+    #
+      swag_server_domain:
+        type: str
+        required: true
+
+      swag_cert_email:
+        type: str
+        required: false
+
+      swag_cert_validation:
+        type: str
+        required: false
+
+      swag_cert_provider:
+        type: str
+        required: false
+
+      swag_cert_dnsplugin:
+        type: str
+        required: false
+
+      swag_cert_dns_config:
+        type: str
+        required: false
+    #
+    # DEFAULTS
+    #
+      swag_root_config_dir:
+        type: str
+        required: false
+        default: /srv/swag
+
+      swag_container_image:
+        type: str
+        required: false
+        default: lscr.io/linuxserver/swag:latest
+
+      swag_container_ports:
+        type: list
+        elements: str
+        required: false
+        default:
+          - 80:80
+          - 443:443
+
+      swag_container_volumes:
+        type: list
+        elements: str
+        required: false
+        default:
+          - "{{ swag_root_config_dir }}/{{ swag_server_domain }}/config:/config"
+
+      swag_user:
+        type: str
+        required: false
+        default: swag
+
+      swag_user_id:
+        type: str
+        required: false
+        default: "1001"
+
+      swag_group:
+        type: str
+        required: false
+        default: swag
+
+      swag_group_id:
+        type: str
+        required: false
+        default: "1001"
+
+      swag_owner:
+        type: str
+        required: false
+        default: root
+
+      swag_dir_mode:
+        type: str
+        required: false
+        default: "2775"
+
+      swag_file_mode:
+        type: str
+        required: false
+        default: "640"
+
+      swag_group_members:
+        type: list
+        elements: str
+        required: false
+
+      swag_timezone:
+        type: str
+        required: false
+        default: Etc/UTC
+
+      swag_cert_domain:
+        type: str
+        required: false
+        default: "{{ swag_server_domain }}"
+
+      swag_cert_subdomains:
+        type: list
+        elements: str
+        required: false
+
+      swag_cert_extra_domains:
+        type: list
+        elements: str
+        required: false
+
+      swag_cert_config_extension:
+        type: str
+        required: false
+        default: ini
+
+      swag_cert_staging:
+        type: bool
+        required: false
+        default: false
+
+      swag_disable_default_page:
+        type: bool
+        required: false
+        default: false
