@@ -93,13 +93,4 @@
     group: root
     mode: "755"
 
-- name: Ensure swag default page file absent
-  when: swag_disable_default_page|bool
-  become: yes
-  tags:
-    - swag
-  file:
-    path: "{{ swag_config_dir }}/config/www/index.html"
-    state: absent
-
 - meta: flush_handlers
