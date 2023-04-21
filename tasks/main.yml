@@ -1,10 +1,4 @@
 ---
-- name: Set configuration values
-  tags:
-    - always
-  set_fact:
-    swag_config_dir: "{{ swag_root_config_dir }}/{{ swag_server_domain|mandatory }}"
-
 - name: Ensure service group
   become: yes
   tags:

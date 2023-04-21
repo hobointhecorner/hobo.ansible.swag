@@ -1,11 +1,11 @@
 ---
-swag_root_config_dir: /srv/swag
+swag_config_dir: /srv/swag
 swag_container_image: lscr.io/linuxserver/swag:latest
 swag_container_ports:
   - 80:80
   - 443:443
 swag_container_volumes:
-  - "{{ swag_root_config_dir }}/{{ swag_server_domain }}/config:/config"
+  - "{{ swag_config_dir }}/config:/config"
 
 swag_user: swag
 swag_user_id: 1001

@@ -11,10 +11,10 @@ Install and configure a Secure Web Application Gateway (SWAG) docker container w
 |            Name            | Required | Type | Default | Description |
 |----------------------------|----------|------|----------|------------|
 |     swag_server_domain     | **yes**  |    string    | | The domain name of the hosted server |
-|    swag_root_config_dir    |   no     |    string    | /srv/swag | The root directory where one or more container configuration directories will be stored (based on `swag_server_domain`) |
+|    swag_config_dir    |   no     |    string    | /srv/swag | The directory in which configuration files will be stored |
 |    swag_conatiner_image    |   no     |    string    | lscr.io/linuxserver/swag:latest | Image and tag of the SWAG container to deploy |
 |    swag_container_ports    |   no     | list(string) | `[80:80, 443:443]` | Ports on the host to be exposed to the container |
-|   swag_container_volumes   |   no     | list(string) | `{{ swag_root_config_dir }}/{{ swag_server_domain }}/config:/config` | Volumes to be exposed to the container
+|   swag_container_volumes   |   no     | list(string) | `{{ swag_config_dir }}/config:/config` | Volumes to be exposed to the container
 |         swag_user          |   no     |    string    | swag | User that will run the swag service (will be created if not existant) |
 |        swag_user_id        |   no     |    string    | 1001 | User ID of the existing/created service user |
 |         swag_group         |   no     |    string    | swag | Group for the service account |

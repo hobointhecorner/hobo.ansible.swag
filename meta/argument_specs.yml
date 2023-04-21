@@ -31,7 +31,7 @@ argument_specs:
     #
     # DEFAULTS
     #
-      swag_root_config_dir:
+      swag_config_dir:
         type: str
         required: false
         default: /srv/swag
@@ -54,7 +54,7 @@ argument_specs:
         elements: str
         required: false
         default:
-          - "{{ swag_root_config_dir }}/{{ swag_server_domain }}/config:/config"
+          - "{{ swag_config_dir }}/config:/config"
 
       swag_user:
         type: str
