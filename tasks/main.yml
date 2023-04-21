@@ -107,3 +107,5 @@
   file:
     path: "{{ swag_config_dir }}/config/www/index.html"
     state: absent
+
+- meta: flush_handlers
