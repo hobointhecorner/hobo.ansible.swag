@@ -20,6 +20,9 @@
   user:
     name: "{{ swag_user }}"
     group: "{{ swag_group }}"
+    append: yes
+    groups:
+      - docker
 
 - name: Ensure service group membership
   become: yes
