@@ -9,9 +9,9 @@ RemainAfterExit=true
 User={{ swag_user }}
 Group={{ swag_group }}
 WorkingDirectory={{ swag_config_dir }}
-ExecStart=/usr/bin/docker-compose up -d --remove-orphans
-ExecReload=/usr/bin/docker-compose up -d --remove-orphans
-ExecStop=/usr/bin/docker-compose down
+ExecStart=/usr/bin/docker compose up -d --remove-orphans
+ExecReload=/usr/bin/docker compose up -d --remove-orphans
+ExecStop=/usr/bin/docker compose down
 
 [Install]
 WantedBy=multi-user.target
