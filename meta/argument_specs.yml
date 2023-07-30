@@ -41,6 +41,19 @@ argument_specs:
         required: false
         default: lscr.io/linuxserver/swag:latest
 
+      swag_docker_network_config:
+        type: dict
+        required: false
+        default:
+          swag:
+            driver: bridge
+
+      swag_container_network_config:
+        type: raw
+        required: false
+        default:
+          - swag
+
       swag_container_ports:
         type: list
         elements: str

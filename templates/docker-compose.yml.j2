@@ -1,5 +1,8 @@
 version: "3.2"
 
+networks:
+{{ swag_docker_network_config|to_nice_yaml(indent=2) }}
+
 services:
   swag:
     container_name: swag.{{ swag_server_domain|mandatory }}
@@ -7,6 +10,8 @@ services:
     restart: unless-stopped
     cap_add:
       - NET_ADMIN
+    networks:
+{{ swag_container_network_config|to_nice_yaml(indent=6) }}
     ports: {{ swag_container_ports | to_json }}
     volumes: {{ swag_container_volumes | to_json }}
     env_file: {{ swag_config_dir }}/.env
