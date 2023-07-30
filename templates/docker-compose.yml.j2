@@ -1,15 +1,15 @@
 version: "3.2"
 
-networks: {{ swag_docker_network_config|to_json }}
+networks: {{ swag_docker_network_config | to_json }}
 
 services:
   swag:
-    container_name: swag.{{ swag_server_domain|mandatory }}
+    container_name: swag.{{ swag_server_domain | mandatory }}
     image: {{ swag_container_image }}
     restart: unless-stopped
     cap_add:
       - NET_ADMIN
-    networks: {{ swag_container_network_config|to_json }}
+    networks: {{ swag_container_network_config | to_json }}
     ports: {{ swag_container_ports | to_json }}
     volumes: {{ swag_container_volumes | to_json }}
     env_file: {{ swag_config_dir }}/.env
