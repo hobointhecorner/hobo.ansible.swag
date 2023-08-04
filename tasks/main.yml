@@ -62,8 +62,6 @@
   copy:
     dest: "{{ swag_config_dir }}/config/dns-conf/{{ swag_cert_dnsplugin }}.{{ swag_cert_config_extension }}"
     content: "{{ swag_cert_dns_config }}"
-    owner: "{{ swag_owner }}"
-    group: "{{ swag_group }}"
     mode: "{{ swag_file_mode }}"
 
 - name: Template swag service file
