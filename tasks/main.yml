@@ -1,33 +1,33 @@
 ---
-- name: Ensure service group
-  become: yes
-  tags:
-    - swag
-  group:
-    name: "{{ swag_group }}"
-    gid: "{{ swag_group_id }}"
+# - name: Ensure service group
+#   become: yes
+#   tags:
+#     - swag
+#   group:
+#     name: "{{ swag_group }}"
+#     gid: "{{ swag_group_id }}"
 
-- name: Ensure service user
-  become: yes
-  tags:
-    - swag
-  user:
-    name: "{{ swag_user }}"
-    group: "{{ swag_group }}"
-    append: yes
-    groups:
-      - docker
+# - name: Ensure service user
+#   become: yes
+#   tags:
+#     - swag
+#   user:
+#     name: "{{ swag_user }}"
+#     group: "{{ swag_group }}"
+#     append: yes
+#     groups:
+#       - docker
 
-- name: Ensure service group membership
-  become: yes
-  loop: "{{ swag_group_members }}"
-  tags:
-    - swag
-  user:
-    name: "{{ item }}"
-    append: yes
-    groups:
-      - "{{ swag_group }}"
+# - name: Ensure service group membership
+#   become: yes
+#   loop: "{{ swag_group_members }}"
+#   tags:
+#     - swag
+#   user:
+#     name: "{{ item }}"
+#     append: yes
+#     groups:
+#       - "{{ swag_group }}"
 
 - name: Ensure configuration directories
   become: yes

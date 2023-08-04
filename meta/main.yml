@@ -8,3 +8,9 @@ galaxy_info:
   license: MPL-2.0
 
   galaxy_tags: []
+
+dependencies:
+  - src: git+git@github.com:hobointhecorner/hobo.ansible.service_user.git
+    version: v1
+    name: hobo.service_user
+    service_user_name: swag
