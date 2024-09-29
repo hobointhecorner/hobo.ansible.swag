@@ -1,3 +1,4 @@
+---
 - name: Template swag service file
   become: true
   notify: Reload swag service
