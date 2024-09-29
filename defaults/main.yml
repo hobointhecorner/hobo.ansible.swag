@@ -6,6 +6,11 @@ swag_container_ports:
   - 443:443
 swag_container_volumes:
   - "{{ swag_config_dir }}/config:/config"
+swag_container_network_config:
+  - swag
+swag_docker_network_config:
+  swag:
+    driver: bridge
 
 swag_user: swag
 swag_user_id: 1001
