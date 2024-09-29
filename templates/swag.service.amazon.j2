@@ -1,0 +1,17 @@
+[Unit]
+Description=swag {{ swag_server_domain }}
+After=docker.service
+Requires=docker.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=true
+User={{ swag_user }}
+Group={{ swag_group }}
+WorkingDirectory={{ swag_config_dir }}
+ExecStart=/usr/bin/docker-compose up -d --remove-orphans
+ExecReload=/usr/bin/docker-compose up -d --remove-orphans
+ExecStop=/usr/bin/docker-compose down
+
+[Install]
+WantedBy=multi-user.target

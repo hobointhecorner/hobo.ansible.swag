@@ -1,6 +1,6 @@
 ---
 - name: Ensure configuration directories
-  become: yes
+  become: true
   loop:
     - "{{ swag_config_dir }}"
     - "{{ swag_config_dir }}/config"
@@ -30,7 +30,7 @@
       {%- endif -%}
 
 - name: Template docker compose file
-  become: yes
+  become: true
   notify: Reload swag service
   tags:
     - swag
@@ -42,7 +42,7 @@
     mode: "{{ swag_dir_mode }}"
 
 - name: Template .env file
-  become: yes
+  become: true
   notify: Reload swag service
   tags:
     - swag
@@ -54,7 +54,7 @@
     mode: "{{ swag_file_mode }}"
 
 - name: Ensure swag cert config file
-  become: yes
+  become: true
   notify: Reload swag service
   when: swag_cert_dns_config is defined
   tags:
@@ -64,16 +64,14 @@
     content: "{{ swag_cert_dns_config }}"
     mode: "{{ swag_file_mode }}"
 
-- name: Template swag service file
-  become: yes
-  notify: Reload swag service
+- when: ansible_distribution|lower == 'ubuntu'
+  include_tasks: ubuntu.yml
   tags:
     - swag
-  template:
-    src: swag.service.j2
-    dest: /etc/systemd/system/swag.{{ swag_server_domain }}.service
-    owner: root
-    group: root
-    mode: "755"
+
+- when: ansible_distribution|lower == 'amazon'
+  include_tasks: amazon.yml
+  tags:
+    - swag
 
 - meta: flush_handlers

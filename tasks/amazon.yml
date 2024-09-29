@@ -1,0 +1,11 @@
+- name: Template swag service file
+  become: true
+  notify: Reload swag service
+  tags:
+    - swag
+  template:
+    src: swag.service.amazon.j2
+    dest: /etc/systemd/system/swag.{{ swag_server_domain }}.service
+    owner: root
+    group: root
+    mode: "755"
