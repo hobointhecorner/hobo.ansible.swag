@@ -5,6 +5,7 @@
     - "{{ swag_config_dir }}"
     - "{{ swag_config_dir }}/config"
     - "{{ swag_config_dir }}/config/dns-conf"
+    - "{{ swag_config_dir }}/config/nginx/proxy-confs"
   tags:
     - swag
   file:
